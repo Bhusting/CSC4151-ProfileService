@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: 'eaae03d2-118a-487a-b1b8-f05af326d29c'
   imageRepository: 'profileservice'
   containerRegistry: 'takapp.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   
   # Agent VM image name
