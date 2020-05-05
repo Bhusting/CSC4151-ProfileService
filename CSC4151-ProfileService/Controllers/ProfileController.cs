@@ -37,5 +37,8 @@ namespace CSC4151_ProfileService.Controllers
 
             return profile;
         }
+
+        //this is a test comment 
+
     }
 }
