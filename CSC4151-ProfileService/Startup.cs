@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Common.Clients;
 using Common.Repositories;
 using Common.Settings;
+using CSC4151_ProfileService.ASB;
+using CSC4151_ProfileService.Handlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,11 +36,22 @@ namespace CSC4151_ProfileService
             Configuration.Bind("SQL", settings);
             services.AddSingleton<SqlSettings>(settings);
 
+            var config = new Settings();
+            Configuration.Bind("Configuration", config);
+            services.AddSingleton<ISettings>(config);
+
             // Repositories
             services.AddSingleton<IProfileRepository, ProfileRepository>();
             
             // Clients
             services.AddSingleton<SqlClient>();
+
+            // Handlers
+            services.AddSingleton<CreateProfileHandler>();
+
+            // ServiceBus
+            services.AddSingleton<ServiceBusClient>();
+            services.AddHostedService<EndpointIntializer>();
 
             services.AddControllers();
         }
