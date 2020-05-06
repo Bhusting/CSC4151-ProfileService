@@ -37,5 +37,19 @@ namespace CSC4151_ProfileService.Controllers
 
             return profile;
         }
+
+        /// <summary>
+        /// Retrieves a Users XP Value.
+        /// </summary>
+        /// <param name="id">Id of the profile to retrieve.</param>
+        /// <returns>XP value.</returns>
+        public async Task<int> GetXP(Guid id)
+        {
+            _logger.LogInformation($"Get XP {id}");
+
+            var profile = await _profileRepository.GetProfile(id);
+
+            return profile.XP;
+        }
     }
 }
