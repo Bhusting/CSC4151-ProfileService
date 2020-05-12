@@ -12,7 +12,7 @@ namespace EndToEndTests
         [Fact]
         public async Task GetProfile()
         {
-            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:54281") };
+            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:32770") };
 
             var res = await httpClient.GetAsync($"Profile/{Guid.Empty}");
 
@@ -22,8 +22,12 @@ namespace EndToEndTests
 
             var profile = JsonConvert.DeserializeObject<Profile>(body);
 
-            Assert.True(profile.UserId == Guid.Empty);
+            Assert.True(profile.ProfileId == Guid.Empty);
             Assert.True(profile.FirstName == "Rodney");
         }
+
+
+
     }
 }
+
