@@ -43,6 +43,7 @@ namespace CSC4151_ProfileService.Controllers
         /// </summary>
         /// <param name="id">Id of the profile to retrieve.</param>
         /// <returns>XP value.</returns>
+        [HttpGet("{id}/XP")]
         public async Task<int> GetXP(Guid id)
         {
             _logger.LogInformation($"Get XP {id}");
@@ -50,6 +51,23 @@ namespace CSC4151_ProfileService.Controllers
             var profile = await _profileRepository.GetProfile(id);
 
             return profile.XP;
+        }
+
+        /// <summary>
+        /// Retrieves a User from Email
+        /// </summary>
+        /// <param name="email">Email of the User</param>
+        /// <returns>User Profile</returns>
+        [HttpGet("Email/{email}")]
+        public async Task<Profile> GetProfileByEmail(string email)
+        {
+            var e = email + ".com";
+
+            _logger.LogInformation($"Get Profile Email {e}");
+
+            var profile = await _profileRepository.GetProfileByEmail(e);
+
+            return profile;
         }
     }
 }
