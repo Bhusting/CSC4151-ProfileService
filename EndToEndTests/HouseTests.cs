@@ -23,11 +23,25 @@ namespace EndToEndTests
 
             var body = await res.Content.ReadAsStringAsync();
 
-            var profile = JsonConvert.DeserializeObject<House>(body);
+            var house = JsonConvert.DeserializeObject<House>(body);
 
-            Assert.True(profile.HouseId == Guid.Empty);
+            Assert.True(house.HouseId == Guid.Empty);
         }
 
+        [Fact]
+        public async Task GetHouseByProfile()
+        {
+            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:5000") };
 
+            var res = await httpClient.GetAsync($"House/Profile/{Guid.Empty}");
+
+            Assert.True(res.IsSuccessStatusCode);
+
+            var body = await res.Content.ReadAsStringAsync();
+
+            var house = JsonConvert.DeserializeObject<House>(body);
+
+            Assert.True(house.HouseId == Guid.Empty);
+        }
     }
 }
