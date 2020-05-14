@@ -33,5 +33,15 @@ namespace Common.Repositories
 
             return profile[0];
         }
+
+        public async Task<Profile> GetProfileByEmail(string email)
+        {
+            var cmd = $"SELECT * FROM Profile WHERE Email = \'{email}\'";
+
+            var profile = await _sqlClient.Get<Profile>(cmd);
+
+            return profile[0];
+        }
+        
     }
 }

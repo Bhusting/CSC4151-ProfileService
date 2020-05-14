@@ -14,5 +14,7 @@ namespace Common.Repositories
         /// <param name="id">Id of the Profile to retrieve.</param>
         /// <returns>User Profile</returns>
         Task<Profile> GetProfile(Guid id);
+
+        Task<Profile> GetProfileByEmail(string email);
     }
 }
