@@ -27,9 +27,7 @@ namespace CSC4151_ProfileService.Handlers
             _logger.LogInformation("Creating User");
 
             var profile = JsonConvert.DeserializeObject<Profile>(messageBody);
-
-            profile.ProfileId = Guid.NewGuid();
-
+            
             var cmd = SqlCommandBuilder.InsertRecord(profile);
 
             await _sqlClient.Insert(cmd);

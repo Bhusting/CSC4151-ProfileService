@@ -67,6 +67,8 @@ namespace CSC4151_ProfileService.ASB
             var body = Encoding.ASCII.GetString(message.Body);
 
             await handler.Handle(body);
+
+            await _queueClient.CompleteAsync(message.SystemProperties.LockToken);
         }
 
         private Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
