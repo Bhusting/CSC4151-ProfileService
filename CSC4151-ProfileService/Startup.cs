@@ -42,6 +42,7 @@ namespace CSC4151_ProfileService
 
             // Repositories
             services.AddSingleton<IProfileRepository, ProfileRepository>();
+            services.AddSingleton<IHouseRepository, HouseRepository>();
             
             // Clients
             services.AddSingleton<SqlClient>();
