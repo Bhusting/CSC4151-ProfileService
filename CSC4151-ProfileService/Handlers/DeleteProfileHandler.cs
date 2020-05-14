@@ -23,9 +23,9 @@ namespace CSC4151_ProfileService.Handlers
 
         public async Task Handle(string messageBody)
         {
-            _logger.LogInformation("Creating User");
-
             var profileId = JsonConvert.DeserializeObject<Guid>(messageBody);
+
+            _logger.LogInformation($"Deleting User {profileId}");
 
             var cmd = SqlCommandBuilder.DeleteRecord(typeof(Profile), profileId);
 
