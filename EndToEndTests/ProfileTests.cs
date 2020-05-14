@@ -7,12 +7,12 @@ using Xunit;
 
 namespace EndToEndTests
 {
-    public class UnitTest1
+    public class ProfileTests
     {
         [Fact]
         public async Task GetProfile()
         {
-            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:32770") };
+            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:5000") };
 
             var res = await httpClient.GetAsync($"Profile/{Guid.Empty}");
 
@@ -29,7 +29,7 @@ namespace EndToEndTests
         [Fact]
         public async Task GetProfileByEmail()
         {
-            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:54281") };
+            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:5000") };
 
             var str = "Profile/Email/theruxter18@hotmail";
 
