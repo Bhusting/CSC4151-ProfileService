@@ -10,10 +10,13 @@ namespace EndToEndTests
 {
     public class ProfileTests
     {
+        //private readonly Uri _path = new Uri("https://takprofile.azurewebsites.net");
+        private readonly Uri _path = new Uri("http://localhost:5000");
+
         [Fact]
         public async Task GetProfile()
         {
-            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:5000") };
+            var httpClient = new HttpClient() { BaseAddress = _path };
 
             var res = await httpClient.GetAsync($"Profile/{Guid.Empty}");
 
@@ -30,7 +33,7 @@ namespace EndToEndTests
         [Fact]
         public async Task GetProfileByEmail()
         {
-            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:5000") };
+            var httpClient = new HttpClient() { BaseAddress = _path };
 
             var str = "Profile/Email/theruxter18@hotmail";
 
@@ -50,7 +53,7 @@ namespace EndToEndTests
         public async Task GetHouseProfiles()
         {
 
-            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:5000") };
+            var httpClient = new HttpClient() { BaseAddress = _path };
 
             var str = $"Profile/House/{Guid.Empty}";
 
@@ -61,7 +64,6 @@ namespace EndToEndTests
             var body = await res.Content.ReadAsStringAsync();
 
             var profiles = JsonConvert.DeserializeObject<List<Profile>>(body);
-
 
         }
     }
