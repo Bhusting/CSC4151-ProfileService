@@ -16,5 +16,7 @@ namespace Common.Repositories
         Task<Profile> GetProfile(Guid id);
 
         Task<Profile> GetProfileByEmail(string email);
+
+        Task<List<Profile>> GetHouseProfiles(Guid houseId);
     }
 }

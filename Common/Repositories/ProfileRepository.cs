@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Common.Builders;
@@ -42,6 +43,14 @@ namespace Common.Repositories
 
             return profile[0];
         }
-        
+
+        public async Task<List<Profile>> GetHouseProfiles(Guid houseId)
+        {
+            var cmd = SqlCommandBuilder.GetIndividualParentFromId(typeof(House), typeof(Profile), houseId);
+
+            var profiles = await _sqlClient.Get<Profile>(cmd);
+
+            return profiles;
+        }
     }
 }

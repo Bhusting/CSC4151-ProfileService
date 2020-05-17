@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Domain;
@@ -45,6 +46,24 @@ namespace EndToEndTests
             Assert.True(profile.FirstName == "Rodney");
         }
 
+        [Fact]
+        public async Task GetHouseProfiles()
+        {
+
+            var httpClient = new HttpClient() { BaseAddress = new Uri("http://localhost:5000") };
+
+            var str = $"Profile/House/{Guid.Empty}";
+
+            var res = await httpClient.GetAsync(str);
+
+            Assert.True(res.IsSuccessStatusCode);
+
+            var body = await res.Content.ReadAsStringAsync();
+
+            var profiles = JsonConvert.DeserializeObject<List<Profile>>(body);
+
+
+        }
     }
 }
 

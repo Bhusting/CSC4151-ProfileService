@@ -69,5 +69,16 @@ namespace CSC4151_ProfileService.Controllers
 
             return profile;
         }
+
+        [HttpGet("House/{houseId}")]
+        public async Task<List<Profile>> GetHouseProfiles(Guid houseId)
+        {
+
+            _logger.LogInformation($"Get Profiles {houseId}");
+
+            var profiles = await _profileRepository.GetHouseProfiles(houseId);
+
+            return profiles;
+        }
     }
 }
