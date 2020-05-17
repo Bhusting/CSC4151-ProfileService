@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using Common.Builders;
 using Common.Clients;
@@ -49,6 +50,8 @@ namespace Common.Repositories
             var cmd = SqlCommandBuilder.GetIndividualParentFromId(typeof(House), typeof(Profile), houseId);
 
             var profiles = await _sqlClient.Get<Profile>(cmd);
+
+            profiles.Sort((profile, profile1) => { return profile1.XP.CompareTo(profile.XP); });
 
             return profiles;
         }
