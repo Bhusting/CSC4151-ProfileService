@@ -82,7 +82,7 @@ namespace Common.Builders
             {
                 if (prop.Name.Contains($"{type.Name}Id"))
                 {
-                    return $"DELETE FROM {type.Name} WHERE {prop.Name}={id.ToString()}";
+                    return $"DELETE FROM {type.Name} WHERE {prop.Name} = \'{id.ToString()}\'";
                 }
 
             }
