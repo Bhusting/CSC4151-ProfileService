@@ -49,6 +49,12 @@ namespace CSC4151_ProfileService
 
             // Handlers
             services.AddSingleton<CreateProfileHandler>();
+            services.AddSingleton<DeleteProfileHandler>();
+            services.AddSingleton<AddXPHandler>();
+
+            services.AddSingleton<CreateHouseHandler>();
+            services.AddSingleton<DeleteHouseHandler>();
+            services.AddSingleton<UpdateHouseHandler>();
 
             // ServiceBus
             services.AddSingleton<ServiceBusClient>();
