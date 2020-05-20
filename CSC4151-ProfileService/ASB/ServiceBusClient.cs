@@ -14,10 +14,10 @@ namespace CSC4151_ProfileService.ASB
     public class ServiceBusClient
     {
         private readonly IServiceProvider _provider;
-        private readonly ISettings _settings;
+        private readonly Settings _settings;
         private IQueueClient _queueClient;
 
-        public ServiceBusClient(IServiceProvider provider, ISettings settings)
+        public ServiceBusClient(IServiceProvider provider, Settings settings)
         {
             _provider = provider;
             _settings = settings;

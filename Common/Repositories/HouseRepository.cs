@@ -34,5 +34,19 @@ namespace Common.Repositories
 
             return house[0];
         }
+
+        public async Task CreateHouse(House house)
+        {
+            var cmd = SqlCommandBuilder.InsertRecord(house);
+
+            await _sqlClient.Insert(cmd);
+        }
+
+        public async Task DeleteHouse(Guid houseId)
+        {
+            var cmd = SqlCommandBuilder.DeleteRecord(typeof(House), houseId);
+
+            await _sqlClient.Delete(cmd);
+        }
     }
 }

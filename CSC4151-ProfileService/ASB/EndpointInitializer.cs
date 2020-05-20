@@ -9,11 +9,11 @@ using Microsoft.Extensions.Hosting;
 
 namespace CSC4151_ProfileService.ASB
 {
-    public class EndpointIntializer : BackgroundService
+    public class EndpointInitializer : BackgroundService
     {
         private readonly ServiceBusClient _client;
 
-        public EndpointIntializer(ServiceBusClient client)
+        public EndpointInitializer(ServiceBusClient client)
         {
             _client = client;
         }

@@ -1,24 +1,24 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using Common.Builders;
 using Common.Clients;
 using Common.Settings;
 using Domain;
+using Microsoft.Extensions.Logging;
 using SqlCommandBuilder = Common.Builders.SqlCommandBuilder;
 
 namespace Common.Repositories
 {
     public class ProfileRepository : IProfileRepository
     {
-
+        private readonly ILogger<ProfileRepository> _logger;
         private readonly SqlClient _sqlClient;
 
-        public ProfileRepository(SqlClient sqlClient)
+        public ProfileRepository(ILogger<ProfileRepository> logger, SqlClient sqlClient)
         {
+            _logger = logger;
             _sqlClient = sqlClient;
         }
 
@@ -54,6 +54,20 @@ namespace Common.Repositories
             profiles.Sort((profile, profile1) => { return profile1.XP.CompareTo(profile.XP); });
 
             return profiles;
+        }
+
+        public async Task CreateProfile(Profile profile)
+        {
+            var cmd = SqlCommandBuilder.InsertRecord(profile);
+
+            await _sqlClient.Insert(cmd);
+        }
+
+        public async Task DeleteProfile(Guid profileId)
+        {
+            var cmd = SqlCommandBuilder.DeleteRecord(typeof(Profile), profileId);
+
+            await _sqlClient.Delete(cmd);
         }
     }
 }

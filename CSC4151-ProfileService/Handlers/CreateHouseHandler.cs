@@ -26,13 +26,10 @@ namespace CSC4151_ProfileService.Handlers
             _logger.LogInformation("Creating House");
 
             var house = JsonConvert.DeserializeObject<House>(messageBody);
-
-            house.HouseId = Guid.NewGuid();
-
+            
             var cmd = SqlCommandBuilder.InsertRecord(house);
 
             await _sqlClient.Insert(cmd);
-
         }
     }
 }

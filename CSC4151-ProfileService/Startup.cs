@@ -38,7 +38,7 @@ namespace CSC4151_ProfileService
 
             var config = new Settings();
             Configuration.Bind("Configuration", config);
-            services.AddSingleton<ISettings>(config);
+            services.AddSingleton<Settings>(config);
 
             // Repositories
             services.AddSingleton<IProfileRepository, ProfileRepository>();
@@ -58,7 +58,7 @@ namespace CSC4151_ProfileService
 
             // ServiceBus
             services.AddSingleton<ServiceBusClient>();
-            services.AddHostedService<EndpointIntializer>();
+            services.AddHostedService<EndpointInitializer>();
 
             services.AddControllers();
         }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Common.Settings
 {
-    public class Settings : ISettings
+    public class Settings
     {
         public string ServiceBus { get; set; }
     }

@@ -5,12 +5,22 @@ namespace Common.Builders
 {
     public class SqlCommandBuilder
     {
-
+        /// <summary>
+        /// Gets All Records from a Table
+        /// </summary>
+        /// <param name="type">The Domain Object Related to the Table</param>
+        /// <returns>SQL Command</returns>
         public static string GetRecords(Type type)
         {
             return $"SELECT * FROM {type.Name}";
         }
 
+        /// <summary>
+        /// Gets a Records that has an ID
+        /// </summary>
+        /// <param name="type">The Domain Object Related to the Table</param>
+        /// <param name="id">The Id of the Records</param>
+        /// <returns>SQL Command</returns>
         public static string GetIndividualRecordBuilder(Type type, Guid id)
         {
             return $"SELECT * FROM {type.Name} WHERE {type.Name}Id = \'{id}\'";

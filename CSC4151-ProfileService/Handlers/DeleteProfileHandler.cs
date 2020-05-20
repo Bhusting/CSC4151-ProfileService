@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Common.Builders;
 using Common.Clients;
+using Common.Repositories;
 using Domain;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -13,12 +14,12 @@ namespace CSC4151_ProfileService.Handlers
     public class DeleteProfileHandler : IMessageHandler
     {
         private readonly ILogger<DeleteProfileHandler> _logger;
-        private readonly SqlClient _sqlClient;
+        private readonly IProfileRepository _profileRepository;
 
-        public DeleteProfileHandler(ILogger<DeleteProfileHandler> logger, SqlClient sqlClient)
+        public DeleteProfileHandler(ILogger<DeleteProfileHandler> logger, IProfileRepository profileRepository)
         {
             _logger = logger;
-            _sqlClient = sqlClient;
+            _profileRepository = profileRepository;
         }
 
         public async Task Handle(string messageBody)
@@ -27,9 +28,7 @@ namespace CSC4151_ProfileService.Handlers
 
             _logger.LogInformation($"Deleting User {profileId}");
 
-            var cmd = SqlCommandBuilder.DeleteRecord(typeof(Profile), profileId);
-
-            await _sqlClient.Delete(cmd);
+            await _profileRepository.DeleteProfile(profileId);
         }
     }
 }

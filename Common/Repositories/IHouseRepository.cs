@@ -12,5 +12,9 @@ namespace Common.Repositories
         Task<House> GetHouse(Guid id);
 
         Task<House> GetHouseByProfile(Guid id);
+
+        Task CreateHouse(House house);
+
+        Task DeleteHouse(Guid houseId);
     }
 }
