@@ -58,14 +58,18 @@ namespace CSC4151_ProfileService.Controllers
         /// </summary>
         /// <param name="email">Email of the User</param>
         /// <returns>User Profile</returns>
-        [HttpGet("Email/{email}")]
-        public async Task<Profile> GetProfileByEmail(string email)
+        [HttpGet("Email")]
+        public async Task<Profile> GetProfileByEmail()
         {
-            var e = email + ".com";
+            Request.Headers.TryGetValue("Email", out var value);
 
-            _logger.LogInformation($"Get Profile Email {e}");
+            var emails = value.AsEnumerable();
 
-            var profile = await _profileRepository.GetProfileByEmail(e);
+            var email = emails.First();
+
+            _logger.LogInformation($"Get Profile Email {email}");
+
+            var profile = await _profileRepository.GetProfileByEmail(email);
 
             return profile;
         }

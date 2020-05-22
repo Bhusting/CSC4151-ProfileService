@@ -35,8 +35,11 @@ namespace EndToEndTests
         {
             var httpClient = new HttpClient() { BaseAddress = _path };
 
-            var str = "Profile/Email/theruxter18@hotmail";
+            var str = "Profile/Email";
+            var list = new List<string>();
+            list.Add("theruxter18@hotmail.com");
 
+            httpClient.DefaultRequestHeaders.Add("Email", list);
             var res = await httpClient.GetAsync(str);
 
             Assert.True(res.IsSuccessStatusCode);
