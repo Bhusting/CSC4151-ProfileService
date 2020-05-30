@@ -47,7 +47,7 @@ namespace Common.Repositories
 
         public async Task<List<Profile>> GetHouseProfiles(Guid houseId)
         {
-            var cmd = SqlCommandBuilder.GetIndividualParentFromId(typeof(House), typeof(Profile), houseId);
+            var cmd = $"SELECT * FROM Profile WHERE HouseId = \'{houseId}\'";
 
             var profiles = await _sqlClient.Get<Profile>(cmd);
 
